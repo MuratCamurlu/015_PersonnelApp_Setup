@@ -77,3 +77,7 @@ class PersonalGetUpdateDelete(generics.RetrieveUpdateDestroyAPIView):
 class DepartmentPersonnelView(generics.ListAPIView):
     serializer_class = DepartmentPersonnelSerializer
     queryset = Department.objects.all()
+    
+    def get_queryset(self):
+        name = self.kwargs["department"]
+        return Department.objects.filter(name__iexact=name)
